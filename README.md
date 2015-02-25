@@ -106,6 +106,16 @@ variable. So when we store this a JavaScript file to disk using a
 `fs.writeFileSync('/mytemplate.js', mytemplate);` we can easily access the
 template on the client side by referencing the `mytemplate` global.
 
+So with this knowledge, an illustration of this:
+
+```js
+var Component = React.createClass({
+  render: function render() {
+    return mytemplate({ foo: 'bar' });
+  }
+});
+```
+
 ## Versioning
 
 The minor version of this module is in sync with the version of `react` and
