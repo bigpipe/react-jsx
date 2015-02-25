@@ -1,0 +1,41 @@
+{
+  "name": "react-jsx",
+  "version": "0.12.0",
+  "description": "Compile JSX templates to client and server-side renderable templates",
+  "main": "index.js",
+  "scripts": {
+    "100%": "istanbul check-coverage --statements 100 --functions 100 --lines 100 --branches 100",
+    "test": "mocha test.js",
+    "watch": "mocha --watch test.js",
+    "coverage": "istanbul cover ./node_modules/.bin/_mocha -- test.js",
+    "test-travis": "istanbul cover node_modules/.bin/_mocha --report lcovonly -- test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bigpipe/react-jsx"
+  },
+  "keywords": [
+    "react",
+    "jsx",
+    "compile",
+    "all",
+    "the",
+    "things"
+  ],
+  "author": "Arnout Kazemier",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bigpipe/react-jsx/issues"
+  },
+  "homepage": "https://github.com/bigpipe/react-jsx",
+  "dependencies": {
+    "react": "0.12.x",
+    "react-tools": "0.12.x"
+  },
+  "devDependencies": {
+    "assume": "1.1.x",
+    "istanbul": "0.3.x",
+    "mocha": "2.1.x",
+    "pre-commit": "1.0.x"
+  }
+}
