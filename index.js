@@ -33,12 +33,19 @@ function transform(tpl, options) {
  *
  * @param {String} tpl JSX template string.
  * @param {Object} options Compilation configuration.
- * @returns {String}
+ * @returns {Function}
  * @api public
  */
 exports.client = function client(tpl, options) {
   options = options || {};
 
+  /**
+   * The template render method which returns React DOM elements.
+   *
+   * @param {Object} data Template variables that should be introduced.
+   * @returns {React}
+   * @api public
+   */
   return transform(tpl, {
     sourceFilename: options.filename,
     target: options.ecma || 'es3',
@@ -78,6 +85,7 @@ exports.server = function server(tpl, options) {
    *
    * @param {Object} data Template variables that should be introduced.
    * @returns {String}
+   * @api public
    */
   return function render(data) {
     return React[options.method](compiler(data));
