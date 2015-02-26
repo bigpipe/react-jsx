@@ -36,7 +36,7 @@ function transform(tpl, options) {
  * @returns {Function}
  * @api public
  */
-exports.client = function client(tpl, options) {
+function client(tpl, options) {
   options = options || {};
 
   /**
@@ -52,7 +52,7 @@ exports.client = function client(tpl, options) {
     sourceMap: !!options.debug,
     stripTypes: !options.types
   });
-};
+}
 
 /**
  * Compile the JSX template from client-side usage.
@@ -62,7 +62,7 @@ exports.client = function client(tpl, options) {
  * @returns {Function}
  * @api public
  */
-exports.server = function server(tpl, options) {
+function server(tpl, options) {
   options = options || {};
   options.render = options.render || (options.raw ? 'renderToStaticMarkup' : 'renderToString');
 
@@ -84,13 +84,21 @@ exports.server = function server(tpl, options) {
    * the things.
    *
    * @param {Object} data Template variables that should be introduced.
+   * @param {Object} config Override configuration.
    * @returns {String}
    * @api public
    */
-  return function render(data) {
+  return function render(data, config) {
     var nodes = compiler(data);
 
     if ('DOM' === options.render) return nodes;
     return React[options.render](nodes);
   };
-};
+}
+
+//
+// Expose all the various API's
+//
+exports.transform = transform;
+exports.server = server;
+exports.client = client;
