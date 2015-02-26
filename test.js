@@ -67,6 +67,12 @@ describe('react-jsx', function () {
       assume(jsx.server).is.a('function');
     });
 
+    it('returns React.createElement by default', function () {
+      var server = jsx.server(fixtures.react);
+
+      assume(React.isValidElement(server())).is.true();
+    });
+
     it('can compile the `react.jsx` template', function () {
       var server = jsx.server(fixtures.react);
 
@@ -77,24 +83,24 @@ describe('react-jsx', function () {
       var server = jsx.server(fixtures.react, { raw: true });
 
       assume(server).is.a('function');
-      assume(server()).equals('<div>content</div>');
+      assume(server({}, { html: true })).equals('<div>content</div>');
     });
 
     it('can render the `react.jsx` to a react template string', function () {
       var server = jsx.server(fixtures.react);
 
       assume(server).is.a('function');
-      assume(server()).includes('data-reactid');
-      assume(server()).includes('data-react-checksum');
-      assume(server()).includes('content');
-      assume(server()).includes('div');
+      assume(server({}, { html: true })).includes('data-reactid');
+      assume(server({}, { html: true })).includes('data-react-checksum');
+      assume(server({}, { html: true })).includes('content');
+      assume(server({}, { html: true })).includes('div');
     });
 
     it('can introduce local variables', function () {
       var server = jsx.server(fixtures.advanced);
 
       assume(server).is.a('function');
-      assume(server({ defaultValue: 1 })).includes('button');
+      assume(server({ defaultValue: 1 }, { html: true })).includes('button');
     });
 
     it('can render components', function () {
@@ -104,7 +110,7 @@ describe('react-jsx', function () {
             namethings: function name(named) {
               return named;
             }
-        });
+        }, { html: true });
 
       assume(result).equals('<div>Hello john</div>');
     });

@@ -89,9 +89,11 @@ function server(tpl, options) {
    * @api public
    */
   return function render(data, config) {
+    config = config || {};
+
     var nodes = compiler(data);
 
-    if ('DOM' === options.render) return nodes;
+    if ('DOM' === options.render || !config.html) return nodes;
     return React[options.render](nodes);
   };
 }
