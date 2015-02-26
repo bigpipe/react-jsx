@@ -2,6 +2,7 @@ describe('react-jsx', function () {
   'use strict';
 
   var assume = require('assume')
+    , React = require('react')
     , path = require('path')
     , jsx = require('./')
     , fs = require('fs')
@@ -20,6 +21,12 @@ describe('react-jsx', function () {
 
     return fixtures;
   }, {});
+
+  var Hello = React.createClass({
+    render: function render() {
+      return React.createElement("div", null, "Hello ", this.props.name);
+    }
+  });
 
   describe('.client', function () {
     before(function () {
@@ -88,6 +95,18 @@ describe('react-jsx', function () {
 
       assume(server).is.a('function');
       assume(server({ defaultValue: 1 })).includes('button');
+    });
+
+    it('can render components', function () {
+      var server = jsx.server(fixtures.component, { raw: true })
+        , result = server({
+            Hello: Hello,
+            namethings: function name(named) {
+              return named;
+            }
+        });
+
+      assume(result).equals('<div>Hello john</div>');
     });
   });
 });
