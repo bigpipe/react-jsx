@@ -24,7 +24,7 @@ describe('react-jsx', function () {
 
   var Hello = React.createClass({
     render: function render() {
-      return React.createElement("div", null, "Hello ", this.props.name);
+      return jsx.server(fixtures.hello, { render: 'DOM' })(this);
     }
   });
 

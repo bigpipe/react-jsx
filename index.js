@@ -64,7 +64,7 @@ exports.client = function client(tpl, options) {
  */
 exports.server = function server(tpl, options) {
   options = options || {};
-  options.method = options.raw ? 'renderToStaticMarkup' : 'renderToString';
+  options.render = options.render || (options.raw ? 'renderToStaticMarkup' : 'renderToString');
 
   var compiler = new Function('React', 'return '+ transform(tpl, {
     sourceFilename: options.filename,
@@ -88,6 +88,9 @@ exports.server = function server(tpl, options) {
    * @api public
    */
   return function render(data) {
-    return React[options.method](compiler(data));
+    var nodes = compiler(data);
+
+    if ('DOM' === options.render) return nodes;
+    return React[options.render](nodes);
   };
 };
