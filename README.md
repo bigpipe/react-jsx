@@ -197,7 +197,7 @@ using the `data` argument of the template function as illustrated in this HTTP
 server example: 
 
 ```js
-var http = require('http)
+var http = require('http')
   , path = require('path')
   , React = require('react')
   , jsx = require('react-jsx')
