@@ -1,6 +1,6 @@
 {
   "name": "react-jsx",
-  "version": "0.12.0",
+  "version": "0.12.1",
   "description": "Compile JSX templates to client and server-side renderable templates",
   "main": "index.js",
   "scripts": {
