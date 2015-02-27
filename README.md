@@ -201,7 +201,7 @@ var http = require('http')
   , path = require('path')
   , React = require('react')
   , jsx = require('react-jsx')
-  , read = require('fs').readFileSync
+  , read = require('fs').readFileSync;
 
 var templates = {
   hello: jsx.server(read(path.join(__dirname, 'hello.jsx'), 'utf-8')),
