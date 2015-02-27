@@ -29,7 +29,7 @@ describe('react-jsx', function () {
 
   var Hello = React.createClass({
     render: function render() {
-      return jsx.server(fixtures.hello, { render: 'DOM' })(this);
+      return jsx.server(fixtures.hello)(this);
     }
   });
 
@@ -60,6 +60,12 @@ describe('react-jsx', function () {
 
       assume(client).is.a('function');
       assume(React.isValidElement(client({ defaultValue: 1 }))).is.true();
+    });
+
+    it('can also output HTML', function () {
+      var client = jsx.client(fixtures.react, { raw: true });
+
+      assume(client({}, { html: true })).equals('<div>content</div>');
     });
   });
 
@@ -118,6 +124,28 @@ describe('react-jsx', function () {
         }, { html: true });
 
       assume(result).equals('<div>Hello john</div>');
+    });
+
+    it('assumes data should be used as this if it has props', function () {
+      var server = jsx.server('<Hello name="lol" />', { raw: true })
+        , that = jsx.server(fixtures.this);
+
+      var Hello = React.createClass({
+        render: function () {
+          return that(this);
+        }
+      });
+
+      assume(server).is.a('function');
+      assume(server({ Hello: Hello }, { html: true })).equals('<div>lol</div>');
+    });
+
+    it('works with a custom `this`', function () {
+      var that = jsx.server(fixtures.this, { raw: true });
+
+      assume(that.call({
+        props: { name: 'john' }
+      }, {}, { html: true })).equals('<div>john</div>');
     });
   });
 });
