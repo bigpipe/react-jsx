@@ -18,14 +18,23 @@ var compiler = require('react-tools')
  * element per template.
  *
  * @param {String} tpl Template contents.
- * @param {Object} options Configration for the React JSX compiler.
+ * @param {Object} config Configuration for the React JSX compiler.
+ * @param {Object} options Template configuration.
  * @api private
  */
-function transform(tpl, options) {
-  var rdom = compiler.transform(tpl, options)
+function transform(tpl, config, options) {
+  var rdom = compiler.transform(tpl, config)
     , start = rdom.indexOf('React.createElement');
 
-  return new Function('data', rdom.slice(0, start) + 'with(data || {}) return '+ rdom.slice(start));
+  return new Function('data', 'config', [
+    'var nodes = (function jsx() {',
+      rdom.slice(0, start),
+      'with (data || {}) return '+ rdom.slice(start),
+    '})(), options = '+ JSON.stringify(options || {}) +';',
+
+    'if ("DOM" === options.render || !(config || {}).html) return nodes;',
+    'return React[options.render](nodes);'
+  ].join('\n'));
 }
 
 /**
@@ -51,6 +60,8 @@ function client(tpl, options) {
     target: options.ecma || 'es3',
     sourceMap: !!options.debug,
     stripTypes: !options.types
+  }, {
+    render: options.render || (options.raw ? 'renderToStaticMarkup' : 'renderToString')
   });
 }
 
@@ -64,20 +75,6 @@ function client(tpl, options) {
  */
 function server(tpl, options) {
   options = options || {};
-  options.render = options.render || (options.raw ? 'renderToStaticMarkup' : 'renderToString');
-
-  var compiler = new Function('React', 'return '+ transform(tpl, {
-    sourceFilename: options.filename,
-    target: options.ecma || 'es5',
-    sourceMap: !!options.debug,
-    stripTypes: !options.types
-  }));
-
-  //
-  // Introduce React as local variable as the generated template is full of
-  // React.createElement method calls.
-  //
-  compiler = compiler(React);
 
   /**
    * The template render method which uses the compiled React-template to do all
@@ -88,14 +85,14 @@ function server(tpl, options) {
    * @returns {String}
    * @api public
    */
-  return function render(data, config) {
-    config = config || {};
-
-    var nodes = compiler(data);
-
-    if ('DOM' === options.render || !config.html) return nodes;
-    return React[options.render](nodes);
-  };
+  return (new Function('React', 'return '+ transform(tpl, {
+    sourceFilename: options.filename,
+    target: options.ecma || 'es5',
+    sourceMap: !!options.debug,
+    stripTypes: !options.types
+  }, {
+    render: options.render || (options.raw ? 'renderToStaticMarkup' : 'renderToString')
+  })))(React);
 }
 
 //
