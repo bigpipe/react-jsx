@@ -1,0 +1,22 @@
+{
+  "name": "example",
+  "version": "1.0.0",
+  "description": "Template rendering example",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bigpipe/react-jsx"
+  },
+  "author": "Arnout Kazemier",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bigpipe/react-jsx/issues"
+  },
+  "homepage": "https://github.com/bigpipe/react-jsx",
+  "dependencies": {
+    "react": "0.12.2"
+  }
+}
