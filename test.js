@@ -1,6 +1,11 @@
 describe('react-jsx', function () {
   'use strict';
 
+  //
+  // Turn off the annoying jsx warnings by forcing production.
+  //
+  process.env.NODE_ENV = 'production';
+
   var assume = require('assume')
     , React = require('react')
     , path = require('path')
