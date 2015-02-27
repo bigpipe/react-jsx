@@ -27,10 +27,13 @@ function transform(tpl, config, options) {
     , start = rdom.indexOf('React.createElement');
 
   return new Function('data', 'config', [
+    'data = data || {};',
+
     'var nodes = (function jsx() {',
       rdom.slice(0, start),
-      'with (data || {}) return '+ rdom.slice(start),
-    '})(), options = '+ JSON.stringify(options || {}) +';',
+      'with (data) return '+ rdom.slice(start),
+    '}).call(this.props ? this : data),',
+    'options = '+ JSON.stringify(options || {}) +';',
 
     'if ("DOM" === options.render || !(config || {}).html) return nodes;',
     'return React[options.render](nodes);'
