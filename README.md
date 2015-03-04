@@ -185,8 +185,6 @@ to `return` or `module.exports` the template. This is all taken care of under
 the hood. The following example would a valid example of this:
 
 ```jsx
-/** @jsx React.DOM */
-
 <div>
   <input type="text" value={foo} />
 </div>;
@@ -279,8 +277,6 @@ To give you an idea about what we're actually generating here, lets take the
 following JSX template and convert it a client and server template:
 
 ```jsx
-/** @jsx React.DOM */
-
 <div>
   <input type="text" value={defaultValue} />
   <button onclick="alert('clicked!');">Click Me!</button>
