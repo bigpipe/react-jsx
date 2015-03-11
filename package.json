@@ -1,6 +1,6 @@
 {
   "name": "react-jsx",
-  "version": "0.12.1",
+  "version": "0.13.0",
   "description": "Compile JSX templates to client and server-side renderable templates",
   "main": "index.js",
   "scripts": {
@@ -29,13 +29,13 @@
   },
   "homepage": "https://github.com/bigpipe/react-jsx",
   "dependencies": {
-    "react": "0.12.x",
-    "react-tools": "0.12.x"
+    "react": "0.13.x",
+    "react-tools": "0.13.x"
   },
   "devDependencies": {
     "assume": "1.1.x",
     "istanbul": "0.3.x",
-    "mocha": "2.1.x",
+    "mocha": "2.2.x",
     "pre-commit": "1.0.x"
   }
 }
