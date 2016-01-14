@@ -258,7 +258,7 @@ var build = 'var mytemplate = '+ jsx.client(template).toString();
 The `.toString()` method automatically transforms the function in to an
 anonymous function. In the example above we saved the template as `mytemplate`
 variable. So when we store this a JavaScript file to disk using a
-`fs.writeFileSync('/mytemplate.js', mytemplate);` we can easily access the
+`fs.writeFileSync('/mytemplate.js', build);` we can easily access the
 template on the client side by referencing the `mytemplate` global.
 
 So with this knowledge, an illustration of this:
