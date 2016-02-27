@@ -1,8 +1,8 @@
 'use strict';
 
-var compiler = require('react-tools')
-  , React = require('react');
-
+var compiler = require('babel-core')
+  , React = require('react')
+  , ReactDOM = require('react-dom/server');
 /**
  * Watch out, here be demons. This is a hack to prevent JSX from assuming
  * globals everywhere. It's less harmful on the client as those are only used
@@ -23,8 +23,9 @@ var compiler = require('react-tools')
  * @api private
  */
 function transform(tpl, config, options) {
-  var rdom = compiler.transform(tpl, config)
-    , start = rdom.indexOf('React.createElement');
+  var transformed = compiler.transform(tpl, config);
+  var rdom = transformed.code;
+  var start = rdom.indexOf('React.createElement');
 
   return new Function('data', 'config', [
     'data = data || {};',
@@ -36,7 +37,7 @@ function transform(tpl, config, options) {
     'options = '+ JSON.stringify(options || {}) +';',
 
     'if ("DOM" === options.render || !(config || {}).html) return nodes;',
-    'return React[options.render](nodes);'
+    'return ReactDOM[options.render](nodes);'
   ].join('\n'));
 }
 
@@ -59,10 +60,9 @@ function client(tpl, options) {
    * @api public
    */
   return transform(tpl, {
-    sourceFilename: options.filename,
-    target: options.ecma || 'es3',
-    sourceMap: !!options.debug,
-    stripTypes: !options.types
+    filename: options.filename,
+    sourceMaps: !!options.debug,
+    presets: ['react'],
   }, {
     render: options.render || (options.raw ? 'renderToStaticMarkup' : 'renderToString')
   });
@@ -88,14 +88,13 @@ function server(tpl, options) {
    * @returns {String}
    * @api public
    */
-  return (new Function('React', 'return '+ transform(tpl, {
-    sourceFilename: options.filename,
-    target: options.ecma || 'es5',
-    sourceMap: !!options.debug,
-    stripTypes: !options.types
+  return (new Function('React', 'ReactDOM', 'return '+ transform(tpl, {
+    filename: options.filename,
+    sourceMaps: !!options.debug,
+    presets: ['react'],
   }, {
     render: options.render || (options.raw ? 'renderToStaticMarkup' : 'renderToString')
-  })))(React);
+  })))(React, ReactDOM);
 }
 
 //
