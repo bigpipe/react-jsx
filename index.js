@@ -1,6 +1,6 @@
 'use strict';
 
-var compiler = require('babel-core')
+var compiler = require('babel-standalone')
   , React = require('react')
   , ReactDOM = require('react-dom/server');
 /**
