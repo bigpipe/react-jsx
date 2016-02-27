@@ -8,6 +8,7 @@ describe('react-jsx', function () {
 
   var assume = require('assume')
     , React = require('react')
+    , ReactDOM = require('react-dom/server')
     , path = require('path')
     , jsx = require('./')
     , fs = require('fs')
@@ -36,6 +37,7 @@ describe('react-jsx', function () {
   describe('.client', function () {
     before(function () {
       global.React = require('react');
+      global.ReactDOM = require('react-dom/server');
     });
 
     it('is exported as a function', function () {
@@ -72,6 +74,7 @@ describe('react-jsx', function () {
   describe('.server', function () {
     before(function () {
       delete global.React;
+      delete global.ReactDOM;
     });
 
     it('is exported as a function', function () {
