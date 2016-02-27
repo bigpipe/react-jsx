@@ -29,8 +29,10 @@
   },
   "homepage": "https://github.com/bigpipe/react-jsx",
   "dependencies": {
-    "react": "0.13.x",
-    "react-tools": "0.13.x"
+    "babel-core": "^6.5.2",
+    "babel-preset-react": "^6.5.0",
+    "react": "0.14.x",
+    "react-dom": "^0.14.7"
   },
   "devDependencies": {
     "assume": "1.1.x",
