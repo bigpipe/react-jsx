@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 <div>
   <input type="text" value={defaultValue} />
   <button onclick="alert('clicked!');">Click Me!</button>
