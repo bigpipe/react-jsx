@@ -173,7 +173,7 @@ And the template that you would render could then contain:
 <FormattedMessage
   message={this.getIntlMessage('post.meta')}
   num={this.props.post.comments.length}
-  ago={<FormattedRelative value={thisprops.post.date} />}
+  ago={<FormattedRelative value={this.props.post.date} />}
 />
 ```
 
