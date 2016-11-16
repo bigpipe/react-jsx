@@ -31,13 +31,13 @@
   "dependencies": {
     "babel-preset-react": "^6.5.0",
     "babel-standalone": "^6.4.4",
-    "react": "0.14.x",
-    "react-dom": "^0.14.7"
+    "react": "~15.4.0",
+    "react-dom": "^15.4.0"
   },
   "devDependencies": {
-    "assume": "1.1.x",
-    "istanbul": "0.3.x",
-    "mocha": "2.2.x",
-    "pre-commit": "1.0.x"
+    "assume": "~1.4.1",
+    "istanbul": "~0.4.5",
+    "mocha": "~3.1.2",
+    "pre-commit": "~1.1.3"
   }
 }
