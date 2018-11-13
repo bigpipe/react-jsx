@@ -31,7 +31,7 @@
   "dependencies": {
     "babel-preset-react": "^6.5.0",
     "babel-standalone": "^6.4.4",
-    "react": "~15.4.0",
+    "react": "~16.6.3",
     "react-dom": "^15.4.0"
   },
   "devDependencies": {
