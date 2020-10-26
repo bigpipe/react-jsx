@@ -1,6 +1,6 @@
 # react-jsx
 
-[![From bigpipe.io][from]](http://bigpipe.io)[![Version npm][version]](http://browsenpm.org/package/react-jsx)[![Build Status][build]](https://travis-ci.org/bigpipe/react-jsx)[![Dependencies][david]](https://david-dm.org/bigpipe/react-jsx)[![Coverage Status][cover]](https://coveralls.io/r/bigpipe/react-jsx?branch=master)
+[![Version npm][version]](http://browsenpm.org/package/react-jsx)[![Build Status][build]](https://travis-ci.org/bigpipe/react-jsx)[![Dependencies][david]](https://david-dm.org/bigpipe/react-jsx)[![Coverage Status][cover]](https://coveralls.io/r/bigpipe/react-jsx?branch=master)
 
 [from]: https://img.shields.io/badge/from-bigpipe.io-9d8dff.svg?style=flat-square
 [version]: http://img.shields.io/npm/v/react-jsx.svg?style=flat-square
